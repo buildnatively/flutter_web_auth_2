@@ -32,7 +32,7 @@ class FlutterWebAuth2 {
       FlutterWebAuth2Platform.instance;
 
   static final _OnAppLifecycleResumeObserver _resumedObserver =
-      _OnAppLifecycleResumeObserver(_cleanUpDanglingCalls);
+      _OnAppLifecycleResumeObserver(cleanUpDanglingCalls);
 
   static void _assertCallbackScheme(String callbackUrlScheme) {
     if ((kIsWeb || (!Platform.isWindows && !Platform.isLinux)) &&
