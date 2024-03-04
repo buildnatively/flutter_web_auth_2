@@ -25,13 +25,13 @@ public class SwiftFlutterWebAuth2Plugin: NSObject, FlutterPlugin {
             completionHandler = { (url: URL?, err: Error?) in
                 self.completionHandler = nil
 
-                if (sessionToKeepAlive != nil) {
+                if (self.sessionToKeepAlive != nil) {
                     if #available(iOS 12, *) {
-                        (sessionToKeepAlive as! ASWebAuthenticationSession).cancel()
+                        (self.sessionToKeepAlive as! ASWebAuthenticationSession).cancel()
                     } else if #available(iOS 11, *) {
-                        (sessionToKeepAlive as! SFAuthenticationSession).cancel()
+                        (self.sessionToKeepAlive as! SFAuthenticationSession).cancel()
                     }
-                    sessionToKeepAlive = nil
+                    self.sessionToKeepAlive = nil
                 }
 
                 if let err = err {
@@ -101,23 +101,23 @@ public class SwiftFlutterWebAuth2Plugin: NSObject, FlutterPlugin {
                 }
 
                 session.start()
-                sessionToKeepAlive = session
+                self.sessionToKeepAlive = session
             } else if #available(iOS 11, *) {
                 let session = SFAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler!)
                 session.start()
-                sessionToKeepAlive = session
+                self.sessionToKeepAlive = session
             } else {
                 result(FlutterError(code: "FAILED", message: "This plugin does currently not support iOS lower than iOS 11", details: nil))
             }
         } else if call.method == "cleanUpDanglingCalls" {
             // we do not keep track of old callbacks on iOS, so nothing to do here
-            if (sessionToKeepAlive != nil) {
+            if (self.sessionToKeepAlive != nil) {
                 if #available(iOS 12, *) {
-                    (sessionToKeepAlive as! ASWebAuthenticationSession).cancel()
+                    (self.sessionToKeepAlive as! ASWebAuthenticationSession).cancel()
                 } else if #available(iOS 11, *) {
-                    (sessionToKeepAlive as! SFAuthenticationSession).cancel()
+                    (self.sessionToKeepAlive as! SFAuthenticationSession).cancel()
                 }
-                sessionToKeepAlive = nil
+                self.sessionToKeepAlive = nil
             }
             result(nil)
         } else {
