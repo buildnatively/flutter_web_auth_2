@@ -111,6 +111,14 @@ public class SwiftFlutterWebAuth2Plugin: NSObject, FlutterPlugin {
             }
         } else if call.method == "cleanUpDanglingCalls" {
             // we do not keep track of old callbacks on iOS, so nothing to do here
+            if (sessionToKeepAlive != nil) {
+                if #available(iOS 12, *) {
+                    (sessionToKeepAlive as! ASWebAuthenticationSession).cancel()
+                } else if #available(iOS 11, *) {
+                    (sessionToKeepAlive as! SFAuthenticationSession).cancel()
+                }
+                sessionToKeepAlive = nil
+            }
             result(nil)
         } else {
             result(FlutterMethodNotImplemented)
