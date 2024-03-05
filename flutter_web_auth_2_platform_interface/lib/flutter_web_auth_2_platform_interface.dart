@@ -27,7 +27,7 @@ abstract class FlutterWebAuth2Platform extends PlatformInterface {
   }
 
   Future cancel() {
-    return _instance.cancel()
+    return _instance.cancel();
   }
   /// Ask the user to authenticate to the specified web service.
   ///
