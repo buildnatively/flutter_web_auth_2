@@ -41,4 +41,9 @@ class FlutterWebAuth2LinowsPlugin extends FlutterWebAuth2Platform {
     await _serverImpl.clearAllDanglingCalls();
     await _webviewImpl.clearAllDanglingCalls();
   }
+
+  @override
+  Future cancel() async {
+
+  }
 }
