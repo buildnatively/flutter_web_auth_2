@@ -92,6 +92,6 @@ class FlutterWebAuth2 {
 
   static Future<void> cancel() async {
     await _platform.cancel();
-    WidgetsBinding.instance.removeObserver(_resumedObserver);
+    // WidgetsBinding.instance.removeObserver(_resumedObserver);
   }
 }
